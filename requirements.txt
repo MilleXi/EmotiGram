@@ -1,0 +1,12 @@
+torch==2.6.0+cu124
+torchvision>=0.15.2
+transformers>=4.49.0
+tqdm>=4.67.1
+numpy>=2.1.2
+pandas>=2.2.3
+matplotlib>=3.6.3
+seaborn>=0.11.2
+scikit-learn>=1.6.1
+Pillow>=11.0.0
+accelerate>=1.6.0
+openai>=1.71.0

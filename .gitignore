@@ -172,3 +172,9 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+outputs/
+data/
+config.json
+best_model.pt
+models/
