@@ -178,3 +178,5 @@ data/
 config.json
 best_model.pt
 models/
+blip2-finetuned/
+offload_blip2/
