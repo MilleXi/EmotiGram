@@ -180,3 +180,5 @@ best_model.pt
 models/
 blip2-finetuned/
 offload_blip2/
+.gradio/
+tmp/

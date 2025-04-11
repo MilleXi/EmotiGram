@@ -37,9 +37,7 @@ class EmotiGramApp:
             
             # 1. 先加载多模态情感分析模型
             multi_modal_loaded = self.inferencer.load_multi_modal_model(
-                model_path=EMOTION_MODEL_PATH,
-                num_classes=3,
-                fusion_type='moe'
+                model_path=EMOTION_MODEL_PATH
             )
             if not multi_modal_loaded:
                 print("❌ 多模态情感模型加载失败")

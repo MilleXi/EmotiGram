@@ -148,31 +148,25 @@ class ModelInference:
             logger.error(f"生成描述失败: {str(e)}")
             return f"生成描述时出错: {str(e)}"
 
-    def load_multi_modal_model(self, model_path, num_classes=3, fusion_type='moe', bert_model="bert-base-uncased"):
+    def load_multi_modal_model(self, model_path, bert_model="bert-base-uncased"):
         """加载多模态情感分析模型"""
         try:
-            # 导入模型类
-            try:
-                from models.model import MultiModalSentimentModel
-            except ImportError:
-                logger.error("未找到MultiModalSentimentModel类，请确保models.model模块可用")
-                return False
-            
             # 加载tokenizer    
             self.tokenizer = BertTokenizer.from_pretrained(bert_model)
             
             # 加载模型
-            self.multi_modal_model = MultiModalSentimentModel(num_classes=num_classes, fusion_type=fusion_type)
-            self.multi_modal_model.load_state_dict(torch.load(model_path, map_location=self.device))
-            self.multi_modal_model.eval().to(self.device)
+            self.multi_modal_model = torch.jit.load(model_path, map_location=self.device)
+            self.multi_modal_model.eval()  # 确保模型处于评估模式
             
             logger.info("多模态情感模型加载完成")
             return True
             
         except Exception as e:
             logger.error(f"加载多模态模型失败: {str(e)}")
+            import traceback
+            logger.error(traceback.format_exc())
             return False
-
+    
     def predict_emotion(self, image_path, caption, label_map=None):
         """预测图像和文本的情感"""
         if self.multi_modal_model is None or self.tokenizer is None:

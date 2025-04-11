@@ -1,3 +1,4 @@
+#使用data/test.py完成图像->多模态情感分类测试
 import os
 import pandas as pd
 import numpy as np
@@ -120,9 +121,7 @@ def main():
 
     # 加载多模态情感分析模型
     multi_modal_loaded = inferencer.load_multi_modal_model(
-        model_path=MULTI_MODAL_MODEL_PATH,
-        num_classes=3,
-        fusion_type='moe'
+        model_path=MULTI_MODAL_MODEL_PATH
     )
     if not multi_modal_loaded:
         print("加载多模态情感分析模型失败，请检查模型路径是否正确")

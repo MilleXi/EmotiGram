@@ -33,9 +33,7 @@ print(f"\n📢 微调BLIP-2生成推文描述：\n{tuned_caption}")
 
 # 5. 加载多模态情感分析模型
 multi_modal_loaded = inferencer.load_multi_modal_model(
-    model_path="best_model.pt",
-    num_classes=3,
-    fusion_type='moe'
+    model_path="best_model.pt"
 )
 
 if not multi_modal_loaded:
