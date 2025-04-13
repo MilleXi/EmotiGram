@@ -2,7 +2,7 @@ from inference import ModelInference
 from PIL import Image
 
 # 路径配置
-image_path = "data/image/1313.jpg"
+image_path = "data/image/2401.jpg"
 
 # 初始化推理类
 inferencer = ModelInference()

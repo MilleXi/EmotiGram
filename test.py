@@ -36,57 +36,6 @@ TWEET_SENTIMENT_MAP = {
     4: "positive"
 }
 
-def load_tweet_texts(tweet_csv, num_samples=100, balanced=True):
-    print(f"正在加载推文数据集: {tweet_csv}")
-    try:
-        tweet_df = pd.read_csv(
-            tweet_csv,
-            encoding='latin-1',
-            header=None,
-            names=['target', 'ids', 'date', 'flag', 'user', 'text']
-        )
-        print(f"成功加载推文数据集，共 {len(tweet_df)} 条记录")
-
-        tweets = []
-        if balanced:
-            for sentiment in [0, 2, 4]:
-                sentiment_tweets = tweet_df[tweet_df['target'] == sentiment]['text'].tolist()
-                if len(sentiment_tweets) > num_samples:
-                    selected_tweets = random.sample(sentiment_tweets, num_samples)
-                else:
-                    selected_tweets = sentiment_tweets
-                    print(f"警告: 情感 {TWEET_SENTIMENT_MAP[sentiment]} 的推文数量不足 {num_samples}")
-                tweets.extend(selected_tweets)
-                print(f"已选择 {len(selected_tweets)} 条 {TWEET_SENTIMENT_MAP[sentiment]} 情感的推文")
-        else:
-            all_tweets = tweet_df['text'].tolist()
-            tweets = random.sample(all_tweets, min(num_samples * 3, len(all_tweets)))
-            print(f"已随机选择 {len(tweets)} 条推文")
-
-        cleaned_tweets = []
-        for tweet in tweets:
-            cleaned_tweet = ' '.join(word for word in tweet.split() if not word.startswith('http'))
-            if len(cleaned_tweet.split()) >= 3:
-                cleaned_tweets.append(cleaned_tweet)
-
-        print(f"清理后的推文数量: {len(cleaned_tweets)}")
-        return cleaned_tweets
-
-    except Exception as e:
-        print(f"加载推文数据失败: {str(e)}")
-        return [
-            "This is a happy image",
-            "This is a sad image",
-            "This is an angry image",
-            "This is a fearful image",
-            "This is a surprising image",
-            "This is a disgusting image",
-            "This is an image of anticipation",
-            "This is a trusting image",
-            "This is an exciting image",
-            "This is a calm and peaceful image"
-        ]
-
 def plot_confusion_matrix(cm, class_names):
     plt.figure(figsize=(8, 6))
     sns.heatmap(cm, annot=True, cmap='Blues', fmt='d',
