@@ -30,11 +30,7 @@ REVERSE_SENTIMENT_MAP = {
     "neutral": 0,
     "positive": 1
 }
-TWEET_SENTIMENT_MAP = {
-    0: "negative",
-    2: "neutral",
-    4: "positive"
-}
+
 
 def plot_confusion_matrix(cm, class_names):
     plt.figure(figsize=(8, 6))

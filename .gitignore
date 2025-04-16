@@ -182,3 +182,5 @@ blip2-finetuned/
 offload_blip2/
 .gradio/
 tmp/
+compare.ipynb
+trans.py
